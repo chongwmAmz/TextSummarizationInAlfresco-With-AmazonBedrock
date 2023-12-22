@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model xmlns="http://www.alfresco.org/model/dictionary/1.0" name="crestBedrock:Crest-GenAI">
+    <author>chongwm@amazon.com</author>
+    <imports>
+        <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+    </imports>
+    <namespaces>
+        <namespace uri="com.crestsolution.digiworks.awssdk.services.aiml.bedrock" prefix="crestBedrock"/>
+    </namespaces>
+    <data-types/>
+    <constraints/>
+    <types/>
+    <aspects>
+        <aspect name="crestBedrock:GenAI">
+            <title>Bedrock GenAI enhancement</title>
+            <description>Aspects for Generative AI enhancements with Amazon Bedrock</description>
+            <properties>
+                <property name="crestBedrock:prompt">
+                    <title>Prompt to FM</title>
+                    <description>Prompt provided to Foundation Model.</description>
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <default>Summarize the following document.</default>
+                    <index enabled="true">
+                        <tokenised>TRUE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="crestBedrock:summaryTime">
+                    <title>Summarization Time</title>
+                    <description>DateTime when summarization was completed</description>
+                    <type>d:datetime</type>
+                    <mandatory>false</mandatory>
+                    <default>1970-01-01</default>
+                    <index enabled="true">
+                        <tokenised>TRUE</tokenised>
+                    </index>
+                </property>
+                <property name="crestBedrock:generateSummary">
+                    <title>Enable AI generated summary</title>
+                    <description>Use Amazon Bedrock to generate a summary of the contents.</description>
+                    <type>d:boolean</type>
+                    <mandatory>true</mandatory>
+                    <default>true</default>
+                    <index enabled="true">
+                        <tokenised>TRUE</tokenised>
+                    </index>
+                </property>
+                <property name="crestBedrock:summary">
+                    <title>Summary</title>
+                    <description>AI generated summary</description>
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <index enabled="true">
+                        <tokenised>TRUE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="crestBedrock:fm">
+                    <title>Foundation Model</title>
+                    <description>Foundation Model used</description>
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <default>amazon.titan-text-lite-v1</default>
+                    <index enabled="true">
+                        <tokenised>BOTH</tokenised>
+                        <facetable>true</facetable>
+                    </index>
+                    <constraints>
+                        <constraint name="crestBedrock:LIST_9e9d6a98-6995-40a5-8f68-1384e575371d" type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>amazon.titan-tg1-large</value>
+                                    <value>amazon.titan-embed-g1-text-02</value>
+                                    <value>amazon.titan-text-lite-v1</value>
+                                    <value>amazon.titan-text-express-v1</value>
+                                    <value>amazon.titan-embed-text-v1</value>
+                                    <value>stability.stable-diffusion-xl</value>
+                                    <value>stability.stable-diffusion-xl-v0</value>
+                                    <value>stability.stable-diffusion-xl-v1</value>
+                                    <value>ai21.j2-grande-instruct</value>
+                                    <value>ai21.j2-jumbo-instruct</value>
+                                    <value>ai21.j2-mid</value>
+                                    <value>ai21.j2-mid-v1</value>
+                                    <value>ai21.j2-ultra</value>
+                                    <value>ai21.j2-ultra-v1</value>
+                                    <value>anthropic.claude-instant-v1</value>
+                                    <value>anthropic.claude-v1</value>
+                                    <value>anthropic.claude-v2</value>
+                                    <value>cohere.command-text-v14</value>
+                                    <value>cohere.command-light-text-v14</value>
+                                    <value>cohere.embed-english-v3</value>
+                                    <value>cohere.embed-multilingual-v3</value>
+                                    <value>meta.llama2-13b-chat-v1</value>
+                                </list>
+                            </parameter>
+                            <parameter name="caseSensitive">
+                                <value>true</value>
+                            </parameter>
+                            <parameter name="sorted">
+                                <value>true</value>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+                <property name="crestBedrock:temperature">
+                    <title>Temperature</title>
+                    <description>Informs the AI to know whether to play it safe or get creative. Low temperature is predictable, high temperature is unpredictable. A temperature 1.0 may provide low quality responses that border nonsense.</description>
+                    <type>d:float</type>
+                    <mandatory>false</mandatory>
+                    <index enabled="true">
+                        <tokenised>TRUE</tokenised>
+                    </index>
+                    <constraints>
+                        <constraint name="crestBedrock:MINMAX_ba936fd0-33b4-4222-8e38-5bfee5b48b72" type="MINMAX">
+                            <parameter name="minValue">
+                                <value>0.0</value>
+                            </parameter>
+                            <parameter name="maxValue">
+                                <value>1.0</value>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+                <property name="crestBedrock:responseLength">
+                    <title>Response Length</title>
+                    <description>Allowable length of the response the FM can provide. FM verbosity generally increases on a higher value.
+Each FM has its own maximum length (aka tokens).</description>
+                    <type>d:int</type>
+                    <mandatory>false</mandatory>
+                    <default>250</default>
+                    <index enabled="true">
+                        <tokenised>TRUE</tokenised>
+                    </index>
+                </property>
+            </properties>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects/>
+        </aspect>
+    </aspects>
+</model>
